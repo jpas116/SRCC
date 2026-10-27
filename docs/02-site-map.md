@@ -12,11 +12,11 @@
 
 ## Design direction
 
-- **River:** deep river-teal background built from SRCC's existing `#2d6f65`, flowing contour lines in heroes, wavy section dividers.
+- **River:** deep blue water background, flowing contour lines in heroes, wavy section dividers, rounded corners everywhere.
 - **Conspiracy:** taped-up flyers, Polaroid-style photo stacks, stickers, a scrolling marquee. Gig-poster and zine energy.
 - **Events as ticket stubs** with perforated edges.
-- **Fonts:** Dela Gothic One (headlines), Instrument Sans (body), IBM Plex Mono (labels).
-- **Palette:** river teal `#0e2421` / `#2d6f65`, cream `#efe9da`, riso pink `#ff5a7e` (accent), riso yellow `#f2d43a`.
+- **Fonts:** Fraunces (soft serif headlines), Nunito (rounded body and labels). Nothing hard-edged or computerized; smooth like the river.
+- **Palette (river, forest, clay):** night-river blue `#10212d` / deep water `#1b3444`, forest green `#2f5d4a`, sand `#ede4d1`, clay `#c97b3d` (accent), goldenrod `#dcb355`, sage `#b9cfb0`, bark brown `#6b4a2f`.
 
 ## Content SRCC still needs to provide
 

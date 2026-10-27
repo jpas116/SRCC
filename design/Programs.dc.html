@@ -9,17 +9,17 @@
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Instrument+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&amp;family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#0e2421;font-family:'Instrument Sans',system-ui,sans-serif;color:#efe9da}
-a{color:#efe9da}a:hover{color:#ffffff}
+body{margin:0;background:#10212d;font-family:'Nunito',system-ui,sans-serif;color:#ede4d1}
+a{color:#ede4d1}a:hover{color:#ffffff}
 </style>
 </helmet>
 
-<div style="width: 100%; background: #0e2421; color: #efe9da; font-family: 'Instrument Sans', system-ui, sans-serif; overflow: hidden">
+<div style="width: 100%; background: #10212d; color: #ede4d1; font-family: 'Nunito', system-ui, sans-serif; overflow: hidden">
 
 <header style="max-width: 1200px; margin: 0 auto; padding: 20px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px">
-  <a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #efe9da">
+  <a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #ede4d1">
     <img src="../assets/images/web/srcc-logo.png" alt="SRCC: Susquehanna River Creative Conspiracy" style="display: block; height: 64px; width: auto">
     
   </a>
@@ -29,62 +29,62 @@ a{color:#efe9da}a:hover{color:#ffffff}
     <a href="Membership.dc.html" style="text-decoration: none; padding: 10px 0">Membership</a>
     <a href="About.dc.html" style="text-decoration: none; padding: 10px 0">About</a>
     <a href="Book.dc.html" style="text-decoration: none; padding: 10px 0">Book the Space</a>
-    <a href="#donate" style="text-decoration: none; background: {{accent}}; color: #0e2421; padding: 12px 22px; border-radius: 999px; font-weight: 700">Donate</a>
+    <a href="#donate" style="text-decoration: none; background: {{accent}}; color: #10212d; padding: 12px 22px; border-radius: 999px; font-weight: 700">Donate</a>
   </nav>
 </header>
 
 <section aria-labelledby="page-title" style="position: relative; max-width: 1200px; margin: 0 auto; padding: 64px 24px 72px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
-  <svg viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; left: -80px; top: 0; width: 130%; height: 100%; opacity: 0.35; pointer-events: none"><path d="M0 80 C200 30 340 150 540 90 S880 30 1200 110" fill="none" stroke="#2d6f65" stroke-width="2"></path><path d="M0 130 C220 80 350 200 560 140 S900 80 1200 160" fill="none" stroke="#2d6f65" stroke-width="2"></path><path d="M0 180 C240 130 360 250 580 190 S920 130 1200 210" fill="none" stroke="#2d6f65" stroke-width="2"></path></svg>
-  <p style="position: relative; margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #a9c2bc">Programs &amp; resources</p>
-  <h1 id="page-title" style="position: relative; margin: 0; font-family: 'Dela Gothic One', sans-serif; font-weight: 400; font-size: clamp(56px, 8vw, 112px); line-height: 0.95; max-width: 960px">Find your <span style="color: {{accent}}">way in.</span></h1>
-  <p style="position: relative; margin: 0; font-size: 20px; line-height: 1.55; color: #d3dcd8; max-width: 640px">You don't need to be a pro, a member or even sure what you make yet. Pick a door.</p>
+  <svg viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; left: -80px; top: 0; width: 130%; height: 100%; opacity: 0.35; pointer-events: none"><path d="M0 80 C200 30 340 150 540 90 S880 30 1200 110" fill="none" stroke="#2f5d4a" stroke-width="2"></path><path d="M0 130 C220 80 350 200 560 140 S900 80 1200 160" fill="none" stroke="#2f5d4a" stroke-width="2"></path><path d="M0 180 C240 130 360 250 580 190 S920 130 1200 210" fill="none" stroke="#2f5d4a" stroke-width="2"></path></svg>
+  <p style="position: relative; margin: 0; font-family: 'Nunito', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #a8bccb">Programs &amp; resources</p>
+  <h1 id="page-title" style="position: relative; margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(56px, 8vw, 112px); line-height: 0.95; max-width: 960px">Find your <span style="color: {{accent}}">way in.</span></h1>
+  <p style="position: relative; margin: 0; font-size: 20px; line-height: 1.55; color: #d5dde3; max-width: 640px">You don't need to be a pro, a member or even sure what you make yet. Pick a door.</p>
   <nav aria-label="Jump to a program" style="position: relative; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px">
     <sc-for list="{{programs}}" as="p" hint-placeholder-count="6">
-      <a href="#{{p.id}}" style="text-decoration: none; border: 2px solid #2d6f65; padding: 10px 16px; border-radius: 999px; font-size: 15px; font-weight: 600">{{p.name}}</a>
+      <a href="#{{p.id}}" style="text-decoration: none; border: 2px solid #2f5d4a; padding: 10px 16px; border-radius: 999px; font-size: 15px; font-weight: 600">{{p.name}}</a>
     </sc-for>
   </nav>
 </section>
 
 <section aria-label="Programs" style="max-width: 1200px; margin: 0 auto; padding: 0 24px 104px; box-sizing: border-box; display: flex; flex-direction: column; gap: 32px">
   <sc-for list="{{programs}}" as="p" hint-placeholder-count="6">
-    <article id="{{p.id}}" style="background: {{p.bg}}; color: {{p.fg}}; border-radius: 8px; padding: 40px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 32px 48px; transform: rotate({{p.tilt}})">
+    <article id="{{p.id}}" style="background: {{p.bg}}; color: {{p.fg}}; border-radius: 18px; padding: 40px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 32px 48px; transform: rotate({{p.tilt}})">
       <div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
-        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600">{{p.num}} · {{p.kind}}</span>
-        <h2 style="margin: 0; font-family: 'Dela Gothic One', sans-serif; font-weight: 400; font-size: clamp(36px, 4.5vw, 54px); line-height: 1">{{p.name}}</h2>
+        <span style="font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 600">{{p.num}} · {{p.kind}}</span>
+        <h2 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(36px, 4.5vw, 54px); line-height: 1">{{p.name}}</h2>
         <p style="margin: 0; font-size: 19px; line-height: 1.6; max-width: 560px">{{p.desc}}</p>
         <a href="{{p.href}}" style="margin-top: 8px; align-self: flex-start; text-decoration: none; background: {{p.fg}}; color: {{p.bg}}; padding: 14px 24px; border-radius: 999px; font-weight: 700; font-size: 16px">{{p.cta}}</a>
       </div>
       <dl style="flex: 0 1 280px; margin: 0; display: flex; flex-direction: column; gap: 0; border-top: 2px solid {{p.fg}}">
-        <div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 0; border-bottom: 2px solid {{p.fg}}"><dt style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1px; text-transform: uppercase">When</dt><dd style="margin: 0; font-weight: 700; font-size: 18px">{{p.when}}</dd></div>
-        <div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 0; border-bottom: 2px solid {{p.fg}}"><dt style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1px; text-transform: uppercase">Cost</dt><dd style="margin: 0; font-weight: 700; font-size: 18px">{{p.cost}}</dd></div>
-        <div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 0; border-bottom: 2px solid {{p.fg}}"><dt style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1px; text-transform: uppercase">Good for</dt><dd style="margin: 0; font-weight: 700; font-size: 18px">{{p.who}}</dd></div>
+        <div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 0; border-bottom: 2px solid {{p.fg}}"><dt style="font-family: 'Nunito', sans-serif; font-size: 12px; letter-spacing: 1px; text-transform: uppercase">When</dt><dd style="margin: 0; font-weight: 700; font-size: 18px">{{p.when}}</dd></div>
+        <div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 0; border-bottom: 2px solid {{p.fg}}"><dt style="font-family: 'Nunito', sans-serif; font-size: 12px; letter-spacing: 1px; text-transform: uppercase">Cost</dt><dd style="margin: 0; font-weight: 700; font-size: 18px">{{p.cost}}</dd></div>
+        <div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 0; border-bottom: 2px solid {{p.fg}}"><dt style="font-family: 'Nunito', sans-serif; font-size: 12px; letter-spacing: 1px; text-transform: uppercase">Good for</dt><dd style="margin: 0; font-weight: 700; font-size: 18px">{{p.who}}</dd></div>
       </dl>
-      <img src="{{p.img}}" alt="{{p.alt}}" style="display: block; flex: 0 1 260px; width: 260px; max-width: 100%; aspect-ratio: {{p.ratio}}; object-fit: cover; object-position: top; border-radius: 4px; align-self: flex-start; box-shadow: 0 10px 24px rgba(0,0,0,0.25)">
+      <img src="{{p.img}}" alt="{{p.alt}}" style="display: block; flex: 0 1 260px; width: 260px; max-width: 100%; aspect-ratio: {{p.ratio}}; object-fit: cover; object-position: top; border-radius: 10px; align-self: flex-start; box-shadow: 0 10px 24px rgba(0,0,0,0.25)">
     </article>
   </sc-for>
 </section>
 
-<svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true" style="display: block; width: 100%; height: 80px"><path d="M0 40 C180 0 360 80 540 40 S900 0 1080 40 S1320 80 1440 40 L1440 80 L0 80 Z" fill="#efe9da"></path></svg>
+<svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true" style="display: block; width: 100%; height: 80px"><path d="M0 40 C180 0 360 80 540 40 S900 0 1080 40 S1320 80 1440 40 L1440 80 L0 80 Z" fill="#ede4d1"></path></svg>
 
-<section aria-labelledby="res-title" style="background: #efe9da; color: #15201e">
+<section aria-labelledby="res-title" style="background: #ede4d1; color: #142028">
   <div style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 104px; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
     <div style="display: flex; flex-direction: column; gap: 12px; max-width: 720px">
-      <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #2d6f65">Resources</p>
-      <h2 id="res-title" style="margin: 0; font-family: 'Dela Gothic One', sans-serif; font-weight: 400; font-size: clamp(36px, 5vw, 56px); line-height: 1">The spaces &amp; the gear.</h2>
-      <p style="margin: 0; font-size: 18px; line-height: 1.55; color: #3b4a47">Equipped rooms members can use for their own projects.</p>
+      <p style="margin: 0; font-family: 'Nunito', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #2f5d4a">Resources</p>
+      <h2 id="res-title" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(36px, 5vw, 56px); line-height: 1">The spaces &amp; the gear.</h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.55; color: #3f4a52">Equipped rooms members can use for their own projects.</p>
     </div>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
       <sc-for list="{{spaces}}" as="s" hint-placeholder-count="6">
-        <div style="background: #ffffff; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column">
+        <div style="background: #ffffff; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column">
           <sc-if value="{{s.hasImg}}" hint-placeholder-val="{{ false }}">
             <img src="{{s.img}}" alt="{{s.name}}" style="display: block; width: 100%; height: 150px; object-fit: cover; object-position: {{s.pos}}">
           </sc-if>
           <sc-if value="{{s.noImg}}" hint-placeholder-val="{{ true }}">
-            <div style="height: 150px; background: {{s.bg}}; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #e8f2ef">[Photo]</div>
+            <div style="height: 150px; background: {{s.bg}}; display: flex; align-items: center; justify-content: center; font-family: 'Nunito', sans-serif; font-size: 12px; color: #e3ecf1">[Photo]</div>
           </sc-if>
           <div style="padding: 20px; display: flex; flex-direction: column; gap: 8px">
             <h3 style="margin: 0; font-size: 21px; font-weight: 700">{{s.name}}</h3>
-            <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #3b4a47">{{s.desc}}</p>
+            <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #3f4a52">{{s.desc}}</p>
           </div>
         </div>
       </sc-for>
@@ -92,57 +92,57 @@ a{color:#efe9da}a:hover{color:#ffffff}
   </div>
 </section>
 
-<section aria-labelledby="pitch-title" style="background: {{accent}}; color: #0e2421">
+<section aria-labelledby="pitch-title" style="background: {{accent}}; color: #10212d">
   <div style="max-width: 1200px; margin: 0 auto; padding: 64px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
     <div style="display: flex; flex-direction: column; gap: 10px; max-width: 680px">
-      <h2 id="pitch-title" style="margin: 0; font-family: 'Dela Gothic One', sans-serif; font-weight: 400; font-size: clamp(32px, 4.5vw, 52px); line-height: 1">Got an idea for a program?</h2>
+      <h2 id="pitch-title" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4.5vw, 52px); line-height: 1">Got an idea for a program?</h2>
       <p style="margin: 0; font-size: 19px; line-height: 1.5">Teach a workshop, start a circle, host a night. Every program here started as someone's pitch.</p>
     </div>
-    <a href="Book.dc.html" style="text-decoration: none; background: #0e2421; color: #efe9da; padding: 18px 30px; border-radius: 999px; font-weight: 700; font-size: 18px">Pitch it to us →</a>
+    <a href="Book.dc.html" style="text-decoration: none; background: #10212d; color: #ede4d1; padding: 18px 30px; border-radius: 999px; font-weight: 700; font-size: 18px">Pitch it to us →</a>
   </div>
 </section>
 
 <footer id="donate" style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 40px; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
   <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between">
-    <span style="font-family: 'Dela Gothic One', sans-serif; font-size: clamp(28px, 3.5vw, 40px); line-height: 1.05">Keep the river making noise.</span>
-    <a href="https://www.zeffy.com/en-US/donation-form/donate-to-support-srcc" style="text-decoration: none; background: {{accent}}; color: #0e2421; padding: 16px 28px; border-radius: 999px; font-weight: 700; font-size: 17px">Donate</a>
+    <span style="font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(28px, 3.5vw, 40px); line-height: 1.05">Keep the river making noise.</span>
+    <a href="https://www.zeffy.com/en-US/donation-form/donate-to-support-srcc" style="text-decoration: none; background: {{accent}}; color: #10212d; padding: 16px 28px; border-radius: 999px; font-weight: 700; font-size: 17px">Donate</a>
   </div>
   <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 12px 28px; font-weight: 600">
     <a href="Main.dc.html" style="text-decoration: none">Home</a><a href="Events.dc.html" style="text-decoration: none">Events</a><a href="Programs.dc.html" style="text-decoration: none">Programs</a><a href="Membership.dc.html" style="text-decoration: none">Membership</a><a href="About.dc.html" style="text-decoration: none">About</a><a href="Book.dc.html" style="text-decoration: none">Book the Space</a>
   </nav>
-  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 2px solid #1f4540; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9c2bc">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 2px solid #25404f; font-family: 'Nunito', sans-serif; font-size: 13px; color: #a8bccb">
     <span>© SRCC 2023–2026 · 156B Lancaster Ave, Columbia, PA 17512</span>
-    <a href="mailto:contact@srccpaart.org" style="color: #a9c2bc">contact@srccpaart.org</a>
+    <a href="mailto:contact@srccpaart.org" style="color: #a8bccb">contact@srccpaart.org</a>
   </div>
 </footer>
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#ff5a7e","options":["#ff5a7e","#f2d43a","#5fd3c0","#ff7a3d"]},"$preview":{"width":1440,"height":3600}}'>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#c97b3d","options":["#c97b3d","#dcb355","#6fa88a","#4f8fbf"]},"$preview":{"width":1440,"height":3600}}'>
 class Component extends DCLogic {
   renderVals() {
-    const accent = this.props.accent ?? '#ff5a7e';
+    const accent = this.props.accent ?? '#c97b3d';
     const looks = [
-      { bg: accent, fg: '#15201e', tilt: '-0.5deg' },
-      { bg: '#2d6f65', fg: '#ffffff', tilt: '0.4deg' },
-      { bg: '#f2d43a', fg: '#15201e', tilt: '-0.3deg' },
-      { bg: '#efe9da', fg: '#15201e', tilt: '0.5deg' },
-      { bg: '#a9d8cc', fg: '#15201e', tilt: '-0.4deg' },
-      { bg: '#163b36', fg: '#efe9da', tilt: '0.3deg' }
+      { bg: accent, fg: '#142028', tilt: '-0.5deg' },
+      { bg: '#2f5d4a', fg: '#ffffff', tilt: '0.4deg' },
+      { bg: '#dcb355', fg: '#142028', tilt: '-0.3deg' },
+      { bg: '#ede4d1', fg: '#142028', tilt: '0.5deg' },
+      { bg: '#b9cfb0', fg: '#142028', tilt: '-0.4deg' },
+      { bg: '#1b3444', fg: '#ede4d1', tilt: '0.3deg' }
     ];
     const programs = [
-      { id: 'open-mic', img: '../assets/images/web/open-mic.jpg', ratio: '4 / 5', alt: 'Studio Open Mic flyer', kind: 'Drop in', name: 'Open Mic', desc: 'A full stage and full backline, every week. Bands welcome. Bring a song, a set, a poem or a bit.', when: 'Tuesdays · 7–11pm', cost: '$5 donation', who: 'Musicians, poets, comics, anyone', cta: 'See this week', href: 'Events.dc.html' },
-      { id: 'open-art', img: '../assets/images/web/open-art-studio.jpg', ratio: '4 / 5', alt: 'Studio Open Art flyer', kind: 'Drop in', name: 'Open Art Studio', desc: 'Pull up a table and make something. Paint, collage, draw. Art supplies are included, so just bring yourself.', when: 'Tuesdays · 7–11pm', cost: '$5 donation, supplies included', who: 'All ages, all skill levels', cta: 'See this week', href: 'Events.dc.html' },
-      { id: 'circles', img: '../assets/images/web/creative-circles.jpg', ratio: '16 / 9', alt: 'Creative Circles flyer', kind: 'Connect', name: 'Creative Circles', desc: 'A mutual support group for artists. Talk through blocks, burnout and wins with people who get it.', when: 'Last Sundays · 5:30–6:30pm', cost: 'Free', who: 'Working and aspiring artists', cta: 'Next circle', href: 'Events.dc.html' },
-      { id: 'studios', img: '../assets/images/web/membership.jpg', ratio: '10 / 3', alt: 'SRCC Membership banner', kind: 'Make', name: 'Studio Access', desc: 'Equipped spaces for music rehearsal, recording and performance, plus podcasting, art, photography and writing.', when: 'Book your time', cost: 'Included with membership', who: 'Members', cta: 'Become a member', href: 'Membership.dc.html' },
-      { id: 'workshops', img: '../assets/images/web/ev-live-sound-workshop.jpg', ratio: '4 / 5', alt: 'Live Sound Workshop flyer', kind: 'Learn', name: 'Workshops', desc: 'Hands-on sessions like live sound engineering and hand drumming.', when: 'Rotating · see calendar', cost: 'Varies', who: 'Anyone who wants to learn', cta: 'Upcoming workshops', href: 'Events.dc.html' },
-      { id: 'sundays', img: '../assets/images/web/ev-yoga.jpg', ratio: '4 / 5', alt: 'Yoga Flow flyer', kind: 'Slow down', name: 'Sundays at SRCC', desc: 'Yoga Flow in the morning with live meditative music, Boundaries Lounge Jams in the afternoon.', when: 'Yoga 3rd Sundays · Jams 2nd Sundays, 3pm', cost: 'Yoga $10 · Jams [PRICE]', who: 'Everyone', cta: 'See Sundays', href: 'Events.dc.html' }
+      { id: 'open-mic', img: '/_blob/0896814f1c623369f31559323b3117f8', ratio: '4 / 5', alt: 'Studio Open Mic flyer', kind: 'Drop in', name: 'Open Mic', desc: 'A full stage and full backline, every week. Bands welcome. Bring a song, a set, a poem or a bit.', when: 'Tuesdays · 7–11pm', cost: '$5 donation', who: 'Musicians, poets, comics, anyone', cta: 'See this week', href: 'Events.dc.html' },
+      { id: 'open-art', img: '/_blob/038d919edba7a406ae5c2c7b5e5fd447', ratio: '4 / 5', alt: 'Studio Open Art flyer', kind: 'Drop in', name: 'Open Art Studio', desc: 'Pull up a table and make something. Paint, collage, draw. Art supplies are included, so just bring yourself.', when: 'Tuesdays · 7–11pm', cost: '$5 donation, supplies included', who: 'All ages, all skill levels', cta: 'See this week', href: 'Events.dc.html' },
+      { id: 'circles', img: '/_blob/a87263d4d1a3116339ee41844d413344', ratio: '16 / 9', alt: 'Creative Circles flyer', kind: 'Connect', name: 'Creative Circles', desc: 'A mutual support group for artists. Talk through blocks, burnout and wins with people who get it.', when: 'Last Sundays · 5:30–6:30pm', cost: 'Free', who: 'Working and aspiring artists', cta: 'Next circle', href: 'Events.dc.html' },
+      { id: 'studios', img: '/_blob/cba668019e4e87552af20918fe606118', ratio: '10 / 3', alt: 'SRCC Membership banner', kind: 'Make', name: 'Studio Access', desc: 'Equipped spaces for music rehearsal, recording and performance, plus podcasting, art, photography and writing.', when: 'Book your time', cost: 'Included with membership', who: 'Members', cta: 'Become a member', href: 'Membership.dc.html' },
+      { id: 'workshops', img: '/_blob/031f9861d0001e91006b68351e7ec2ee', ratio: '4 / 5', alt: 'Live Sound Workshop flyer', kind: 'Learn', name: 'Workshops', desc: 'Hands-on sessions like live sound engineering and hand drumming.', when: 'Rotating · see calendar', cost: 'Varies', who: 'Anyone who wants to learn', cta: 'Upcoming workshops', href: 'Events.dc.html' },
+      { id: 'sundays', img: '/_blob/295bd6d04a43b0534acb4d65d3e42a19', ratio: '4 / 5', alt: 'Yoga Flow flyer', kind: 'Slow down', name: 'Sundays at SRCC', desc: 'Yoga Flow in the morning with live meditative music, Boundaries Lounge Jams in the afternoon.', when: 'Yoga 3rd Sundays · Jams 2nd Sundays, 3pm', cost: 'Yoga $10 · Jams [PRICE]', who: 'Everyone', cta: 'See Sundays', href: 'Events.dc.html' }
     ].map((p, i) => ({ ...p, ...looks[i], num: String(i + 1).padStart(2, '0') }));
     const spaces = [
-      { name: 'Music rehearsal & stage', desc: 'Full stage and full backline. [Room details]', bg: '#2d6f65', img: '../assets/images/web/open-mic.jpg', pos: '50% 45%' },
-      { name: 'Recording', desc: '[Interface, mics and software]', bg: '#163b36' },
-      { name: 'Podcasting', desc: '[Mics, seats and recording setup]', bg: '#1d4a44' },
-      { name: 'Art studio', desc: 'Easels, supplies and room to get messy.', bg: '#6b3a5c', img: '../assets/images/web/open-art-studio.jpg', pos: '50% 50%' },
+      { name: 'Music rehearsal & stage', desc: 'Full stage and full backline. [Room details]', bg: '#2f5d4a', img: '/_blob/0896814f1c623369f31559323b3117f8', pos: '50% 45%' },
+      { name: 'Recording', desc: '[Interface, mics and software]', bg: '#1b3444' },
+      { name: 'Podcasting', desc: '[Mics, seats and recording setup]', bg: '#24473a' },
+      { name: 'Art studio', desc: 'Easels, supplies and room to get messy.', bg: '#6b4a2f', img: '/_blob/038d919edba7a406ae5c2c7b5e5fd447', pos: '50% 50%' },
       { name: 'Photography', desc: '[Backdrops and lighting]', bg: '#3d5a80' },
       { name: 'Members Lounge', desc: 'Hang out, write, plan the next thing.', bg: '#8a4b1f' }
     ];
