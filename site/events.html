@@ -69,10 +69,36 @@ a{color:#ede4d1}a:hover{color:#ffffff}
   </div>
 </section>
 
+<section aria-labelledby="cal-title" style="max-width: 1200px; margin: 0 auto; padding: 0 24px 72px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+    <h2 id="cal-title" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4vw, 44px); line-height: 1">{{cal.label}}</h2>
+    <div style="display: flex; gap: 8px">
+      <button type="button" aria-label="Previous month" onClick="{{prevMonth}}" style="font: inherit; width: 44px; height: 44px; border-radius: 50%; border: 2px solid #ede4d1; background: transparent; color: #ede4d1; font-size: 20px; cursor: pointer">‹</button>
+      <button type="button" onClick="{{thisMonth}}" style="font: inherit; font-weight: 600; padding: 0 16px; height: 44px; border-radius: 999px; border: 2px solid #ede4d1; background: transparent; color: #ede4d1; cursor: pointer">Today</button>
+      <button type="button" aria-label="Next month" onClick="{{nextMonth}}" style="font: inherit; width: 44px; height: 44px; border-radius: 50%; border: 2px solid #ede4d1; background: transparent; color: #ede4d1; font-size: 20px; cursor: pointer">›</button>
+    </div>
+  </div>
+  <div style="overflow-x: auto">
+    <div style="min-width: 640px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px">
+      <sc-for list="{{dows}}" as="d" hint-placeholder-count="7"><div style="font-family: 'Nunito', sans-serif; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #a8bccb; padding: 4px 8px">{{d}}</div></sc-for>
+      <sc-for list="{{cal.weeks}}" as="w" hint-placeholder-count="5">
+        <sc-for list="{{w.days}}" as="day" hint-placeholder-count="7">
+          <div style="min-height: 92px; border-radius: 12px; padding: 8px; box-sizing: border-box; background: {{day.bg}}; border: 2px solid {{day.border}}; opacity: {{day.opacity}}; display: flex; flex-direction: column; gap: 4px">
+            <span style="font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 15px; color: {{day.fg}}">{{day.n}}</span>
+            <sc-for list="{{day.items}}" as="it" hint-placeholder-count="0">
+              <a href="{{it.href}}" title="{{it.title}}" style="display: block; text-decoration: none; font-size: 12px; line-height: 1.25; padding: 4px 7px; border-radius: 8px; background: {{it.bg}}; color: {{it.fg}}; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">{{it.title}}</a>
+            </sc-for>
+          </div>
+        </sc-for>
+      </sc-for>
+    </div>
+  </div>
+  <p style="margin: 0; display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-size: 13px; color: #a8bccb"><span style="width: 10px; height: 10px; border-radius: 50%; background: #7fcf8a; display: inline-block"></span>{{feedNote}}</p>
+</section>
+
 <section aria-labelledby="upcoming-title" style="max-width: 1200px; margin: 0 auto; padding: 0 24px 96px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
   <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
-    <h2 id="upcoming-title" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4vw, 44px); line-height: 1">Coming up</h2>
-    <p style="margin: 0; display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-size: 13px; color: #a8bccb"><span style="width: 10px; height: 10px; border-radius: 50%; background: #7fcf8a; display: inline-block"></span>{{feedNote}}</p>
+    <h2 id="upcoming-title" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4vw, 44px); line-height: 1">{{listTitle}}</h2>
   </div>
   <div role="group" aria-label="Filter events" style="display: flex; flex-wrap: wrap; gap: 10px">
     <sc-for list="{{filters}}" as="f" hint-placeholder-count="6">
@@ -82,7 +108,7 @@ a{color:#ede4d1}a:hover{color:#ffffff}
 
   <div style="display: flex; flex-direction: column; gap: 14px">
     <sc-for list="{{shown}}" as="ev" hint-placeholder-count="6">
-      <article style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; background: #ede4d1; color: #142028; border-radius: 16px; padding: 20px 24px">
+      <article style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; background: #ede4d1; color: #142028; border-radius: 16px; padding: 20px 24px; opacity: {{ev.opacity}}">
         <div style="width: 84px; flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px; padding-right: 20px; border-right: 2px dashed #b8b0a0">
           <span style="font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 600">{{ev.mon}}</span>
           <span style="font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 38px; line-height: 1">{{ev.day}}</span>
@@ -105,7 +131,7 @@ a{color:#ede4d1}a:hover{color:#ffffff}
       </article>
     </sc-for>
     <sc-if value="{{noUpcoming}}" hint-placeholder-val="{{ false }}">
-      <p style="margin: 0; padding: 24px; border: 2px dashed #2f5d4a; border-radius: 16px; color: #a8bccb; font-size: 16px">Nothing in this category in the next two months. Check back soon, or come to Open Mic any Tuesday.</p>
+      <p style="margin: 0; padding: 24px; border: 2px dashed #2f5d4a; border-radius: 16px; color: #a8bccb; font-size: 16px">Nothing in this category right now. Check back soon, or come to Open Mic any Tuesday.</p>
     </sc-if>
   </div>
 </section>
@@ -201,7 +227,11 @@ class Component extends DCLogic {
       'Open Mic': 'images/open-mic.jpg',
       'Open Art': 'images/open-art-studio.jpg'
     };
-    const feed = (st.feed && st.feed.events) || [];
+    const feedAll = (st.feed && st.feed.events) || [];
+    const upcomingAll = feedAll.filter((e) => !e.past);
+    const hasUpcoming = upcomingAll.length > 0;
+    const feed = hasUpcoming ? upcomingAll : feedAll.filter((e) => e.past).slice().reverse();
+    const listTitle = hasUpcoming ? 'Coming up' : 'Recently at SRCC';
     const all = feed.map((ev) => {
       const d = SRCC.fmtDate(ev.start);
       const key = Object.keys(imgFor).find((k) => ev.title.toLowerCase().includes(k.toLowerCase()));
@@ -209,7 +239,7 @@ class Component extends DCLogic {
       return {
         mon: d.mon, day: d.day, dow: d.dow, cat: ev.category, title: ev.title,
         when: SRCC.when(ev) + (ev.location && !/srcc|lancaster ave/i.test(ev.location) ? ' · ' + ev.location : ''),
-        price: ev.price || (tickets ? '' : ''), tickets, noTickets: !tickets, href: ev.ticketUrl || '#',
+        price: ev.price || '', tickets: tickets && !ev.past, noTickets: !tickets || ev.past, href: ev.ticketUrl || '#', opacity: ev.past ? '0.72' : '1',
         ...(tags[ev.category] || tags['Live music']), img: key ? imgFor[key] : '', hasImg: !!key
       };
     });
@@ -220,7 +250,22 @@ class Component extends DCLogic {
     const matchCat = (c) => current === 'All' || c === current || (current === 'Community' && c === 'Weekly');
     const shown = all.filter((e) => matchCat(e.cat));
     const source = st.feed ? st.feed.source : '';
-    const feedNote = source === 'google-calendar' ? 'Live from SRCC’s Google Calendar · refreshes every few hours' : 'Once live, syncs from Zeffy automatically';
+    const feedNote = source === 'google-calendar' ? 'Live from SRCC’s Google Calendar · refreshes every few hours' + (hasUpcoming ? '' : ' · nothing scheduled yet, showing recent shows') : 'Once live, syncs from Zeffy and the Google Calendar automatically';
+
+    // Month grid
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const off = st.monthOffset || 0;
+    const view = new Date(today.getFullYear(), today.getMonth() + off, 1);
+    const pill = { 'Live music': ['#142028', '#dcb355'], 'Weekly': ['#2f5d4a', '#ffffff'], 'Art': ['#2f5d4a', '#ffffff'], 'Community': ['#6b4a2f', '#ffffff'], 'Wellness': ['#3d5a80', '#ffffff'], 'Workshops': ['#8a4b1f', '#ffffff'] };
+    const calItems = feedAll.map((ev) => ({ ...ev, href: ev.ticketUrl || '#upcoming-title', bg: (pill[ev.category] || pill['Live music'])[0], fg: (pill[ev.category] || pill['Live music'])[1] }));
+    const cal = SRCC.monthGrid(view.getFullYear(), view.getMonth(), calItems, today);
+    cal.weeks.forEach((w) => w.days.forEach((d) => {
+      d.bg = d.blank ? 'transparent' : d.isToday ? '#1b3444' : '#13293a';
+      d.border = d.isToday ? accent : 'transparent';
+      d.fg = d.isToday ? accent : d.isPast ? '#a8bccb' : '#ede4d1';
+      d.opacity = d.blank ? '0' : d.isPast ? '0.75' : '1';
+      d.items = d.items || [];
+    }));
 
     // Archive
     const bgs = ['#24473a', '#2f5d4a', '#1b3444', '#6b4a2f'];
@@ -243,7 +288,9 @@ class Component extends DCLogic {
     });
     const subscribe = (ev) => { ev.preventDefault(); const e = document.getElementById('news-email').value.trim(); SRCC.mailto('contact@srccpaart.org', 'Add me to the SRCC newsletter', ['Please add ' + (e || 'me') + ' to the monthly lineup email.']); };
     return {
-      subscribe, accent, filters, shown, noUpcoming: !!st.feed && shown.length === 0, feedNote,
+      subscribe, accent, filters, shown, noUpcoming: !!st.feed && shown.length === 0, feedNote, listTitle,
+      cal, dows: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      prevMonth: () => this.setState({ monthOffset: off - 1 }), nextMonth: () => this.setState({ monthOffset: off + 1 }), thisMonth: () => this.setState({ monthOffset: 0 }),
       years, query, archive, hasMore: archive.length < filtered.length,
       archiveCount: filtered.length ? 'Showing ' + archive.length + ' of ' + filtered.length : (archiveAll.length ? 'No shows match that search.' : ''),
       archiveTotal: archiveAll.length ? archiveAll.length + '+' : '100+',

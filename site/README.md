@@ -6,7 +6,7 @@ A browser-viewable copy of the design mockup, published with GitHub Pages.
 - `support.js` — a small renderer that makes the design-canvas page format work in a normal browser
 - `images/` — web-compressed copies of SRCC's logo and flyers
 
-- `data/events.json` — upcoming events. Rewritten from SRCC's public Google Calendar by `scripts/fetch_calendar.py` on every deploy and every 6 hours. The copy in the repo is a fallback.
+- `data/events.json` — events from the past 45 days and next 60 days, rewritten from SRCC's public Google Calendar by `scripts/fetch_calendar.py` on every deploy and every 6 hours. Feeds the month grid and the Coming up / Recently lists. The copy in the repo is a fallback.
 - `data/archive.json` — every past show from the old site, used by the archive search
 
 The pages started as copies of `../design/` and are now edited here directly; the design folder is the visual reference.

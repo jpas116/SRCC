@@ -92,7 +92,7 @@ a{color:#ede4d1}a:hover{color:#ffffff}
   <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
     <div style="display: flex; flex-direction: column; gap: 10px">
       <p style="margin: 0; font-family: 'Nunito', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #a8bccb">Coming up</p>
-      <h2 id="events-title" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(36px, 5vw, 60px); line-height: 1">This week at SRCC</h2>
+      <h2 id="events-title" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(36px, 5vw, 60px); line-height: 1">{{homeTitle}}</h2>
     </div>
     <p style="margin: 0; display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-size: 13px; color: #a8bccb"><span style="width: 10px; height: 10px; border-radius: 50%; background: #7fcf8a; display: inline-block"></span>{{feedNote}}</p>
   </div>
@@ -246,7 +246,10 @@ class Component extends DCLogic {
   renderVals() {
     const cream = { bg: '#ede4d1', perf: '#b8b0a0', tagBg: '#2f5d4a', tagFg: '#ffffff' };
     const hot = { bg: '#dcb355', perf: '#8a6d25', tagBg: '#142028', tagFg: '#dcb355' };
-    const feed = (this.state && this.state.feed && this.state.feed.events) || [];
+    const feedAll = (this.state && this.state.feed && this.state.feed.events) || [];
+    const upcomingAll = feedAll.filter((e) => !e.past);
+    const hasUpcoming = upcomingAll.length > 0;
+    const feed = hasUpcoming ? upcomingAll : feedAll.filter((e) => e.past).slice().reverse();
     const events = feed.slice(0, 4).map((ev) => {
       const d = SRCC.fmtDate(ev.start);
       const live = ev.category === 'Live music';
@@ -254,14 +257,15 @@ class Component extends DCLogic {
       return {
         ...(live ? hot : cream), mon: d.mon, day: d.day, dow: d.dow, tag: ev.category, title: ev.title,
         when: SRCC.when(ev), price: ev.price ? (tickets ? ev.price : ev.price + (ev.category === 'Weekly' ? ' donation at the door' : '')) : (tickets ? '' : 'See details'),
-        tickets, noTickets: !tickets, href: ev.ticketUrl || 'events.html'
+        tickets: tickets && !ev.past, noTickets: !tickets || ev.past, href: ev.ticketUrl || 'events.html'
       };
     });
     const source = this.state && this.state.feed ? this.state.feed.source : '';
     const subscribe = (ev) => { ev.preventDefault(); const e = document.getElementById('news-email').value.trim(); SRCC.mailto('contact@srccpaart.org', 'Add me to the SRCC newsletter', ['Please add ' + (e || 'me') + ' to the monthly lineup email.']); };
     return {
       subscribe, accent: this.props.accent ?? '#c97b3d', events, hasEvents: events.length > 0, loading: !(this.state && this.state.feed),
-      feedNote: source === 'google-calendar' ? 'Live from SRCC\u2019s Google Calendar \u00b7 refreshes every few hours' : 'Once live, syncs from Zeffy automatically'
+      homeTitle: hasUpcoming ? 'This week at SRCC' : 'Recently at SRCC',
+      feedNote: source === 'google-calendar' ? 'Live from SRCC\u2019s Google Calendar \u00b7 refreshes every few hours' + (hasUpcoming ? '' : ' \u00b7 nothing scheduled yet') : 'Once live, syncs from Zeffy and the Google Calendar automatically'
     };
   }
 }

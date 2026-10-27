@@ -39,6 +39,25 @@
       var body = lines.filter(function (l) { return l; }).join('\n');
       window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     },
+    // Build a month grid: weeks x 7 days, with the given events placed on their day.
+    monthGrid: function (year, month, events, today) {
+      var first = new Date(year, month, 1), last = new Date(year, month + 1, 0);
+      var startDow = first.getDay();
+      var byDay = {};
+      events.forEach(function (ev) { var d = new Date(ev.start); var k = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate(); (byDay[k] = byDay[k] || []).push(ev); });
+      var weeks = [], week = [];
+      for (var i = 0; i < startDow; i++) week.push({ blank: true, n: '' });
+      for (var day = 1; day <= last.getDate(); day++) {
+        var d = new Date(year, month, day);
+        var k = year + '-' + month + '-' + day;
+        var isToday = today && d.toDateString() === today.toDateString();
+        var isPast = today && d < today && !isToday;
+        week.push({ n: day, isToday: isToday, isPast: isPast, items: byDay[k] || [], hasItems: !!byDay[k] });
+        if (week.length === 7) { weeks.push({ days: week }); week = []; }
+      }
+      if (week.length) { while (week.length < 7) week.push({ blank: true, n: '' }); weeks.push({ days: week }); }
+      return { label: first.toLocaleString('en-US', { month: 'long', year: 'numeric' }), weeks: weeks };
+    },
     share: function (title) {
       var url = window.location.href;
       if (navigator.share) { navigator.share({ title: title, url: url }).catch(function () {}); return; }

@@ -16,8 +16,9 @@ CAL_ID = "bf82dd5d1c8a0ec88c9109e656c0b4bf2611f59cd9d14f0b000614744bcf40d2@group
 ICS_URL = f"https://calendar.google.com/calendar/ical/{CAL_ID}/public/basic.ics"
 OUT = Path(__file__).resolve().parent.parent / "site" / "data" / "events.json"
 TZ = ZoneInfo("America/New_York")
+DAYS_BACK = 45
 DAYS_AHEAD = 60
-MAX_EVENTS = 14
+MAX_EVENTS = 80
 
 TICKET_HOSTS = ("zeffy.com", "venuepilot.com", "eventbrite.com", "ticketleap.com", "eventworld.com")
 
@@ -83,7 +84,7 @@ def build(raw: bytes) -> int:
 
     cal = icalendar.Calendar.from_ical(raw)
     now = dt.datetime.now(TZ)
-    start = now - dt.timedelta(hours=6)
+    start = now - dt.timedelta(days=DAYS_BACK)
     end = now + dt.timedelta(days=DAYS_AHEAD)
 
     # Diagnostics so the Actions log shows what the feed actually contains.
@@ -127,17 +128,20 @@ def build(raw: bytes) -> int:
             "ticketUrl": url,
             "location": loc,
             "description": re.sub(r"<[^>]+>", "", desc)[:400],
+            "past": (e or s) < now,
         })
 
     events.sort(key=lambda x: x["start"])
     events = events[:MAX_EVENTS]
     if not events:
-        print(f"no events in the next {DAYS_AHEAD} days; keeping existing events.json (fallback)")
+        print(f"no events between {DAYS_BACK} days ago and {DAYS_AHEAD} days ahead; keeping existing events.json (fallback)")
         return 0
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps({
         "source": "google-calendar",
         "generatedAt": now.isoformat(),
+        "window": {"from": start.date().isoformat(), "to": end.date().isoformat()},
+        "upcoming": sum(1 for x in events if not x["past"]),
         "events": events,
     }, indent=2, ensure_ascii=False) + "\n")
     print(f"wrote {len(events)} events to {OUT}")
