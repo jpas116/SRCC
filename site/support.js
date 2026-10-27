@@ -16,6 +16,36 @@
   };
   DCLogic.prototype.forceUpdate = function () { if (this.__rerender) this.__rerender(); };
 
+  // Helpers shared by the pages.
+  window.SRCC = {
+    loadJSON: function (url, cb) {
+      fetch(url, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { if (d) cb(d); }).catch(function () {});
+    },
+    fmtDate: function (iso) {
+      var d = new Date(iso);
+      return { mon: d.toLocaleString('en-US', { month: 'short' }).toUpperCase(), day: String(d.getDate()).padStart(2, '0'), dow: d.toLocaleString('en-US', { weekday: 'short' }).toUpperCase(), long: d.toLocaleString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) };
+    },
+    fmtTime: function (iso) {
+      var d = new Date(iso); var h = d.getHours(), m = d.getMinutes();
+      var ap = h >= 12 ? 'pm' : 'am'; h = h % 12 || 12;
+      return h + (m ? ':' + String(m).padStart(2, '0') : '') + ap;
+    },
+    when: function (ev) {
+      if (ev.allDay) return 'All day';
+      var s = window.SRCC.fmtTime(ev.start);
+      return ev.end ? s + '\u2013' + window.SRCC.fmtTime(ev.end) : s;
+    },
+    mailto: function (to, subject, lines) {
+      var body = lines.filter(function (l) { return l; }).join('\n');
+      window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    },
+    share: function (title) {
+      var url = window.location.href;
+      if (navigator.share) { navigator.share({ title: title, url: url }).catch(function () {}); return; }
+      if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { alert('Link copied'); });
+    }
+  };
+
   var HOLE = /\{\{\s*([\w$.]+)\s*\}\}/g;
   var WHOLE = /^\s*\{\{\s*([\w$.]+)\s*\}\}\s*$/;
 
@@ -76,11 +106,11 @@
       if (name.indexOf('hint-') === 0) { el.removeAttribute(name); continue; }
       if (val.indexOf('{{') < 0) continue;
       var whole = WHOLE.exec(val);
-      if (name === 'onclick') {
+      if (name.indexOf('on') === 0) {
         el.removeAttribute(name);
         if (whole) {
           var fn = lookup(whole[1], scope);
-          if (typeof fn === 'function') el.addEventListener('click', fn);
+          if (typeof fn === 'function') el.addEventListener(name.slice(2), fn);
         }
         continue;
       }
@@ -112,16 +142,26 @@
     var template = Array.prototype.slice.call(root.childNodes);
     var mount = document.createElement('div');
     root.parentNode.insertBefore(mount, root);
+    root.parentNode.removeChild(root);
 
     function render() {
+      var active = document.activeElement, focusId = active && active.id, pos = null;
+      try { pos = active && typeof active.selectionStart === 'number' ? active.selectionStart : null; } catch (e) {}
       var vals = comp.renderVals ? comp.renderVals() : {};
       var out = [];
       renderNodes(template, [vals], out);
       while (mount.firstChild) mount.removeChild(mount.firstChild);
       for (var i = 0; i < out.length; i++) mount.appendChild(out[i]);
+      if (focusId) {
+        var again = document.getElementById(focusId);
+        if (again) { again.focus(); if (pos !== null) { try { again.setSelectionRange(pos, pos); } catch (e) {} } }
+      }
     }
     comp.__rerender = render;
     render();
+    if (typeof comp.componentDidMount === 'function') {
+      try { comp.componentDidMount(); } catch (e) { console.error('SRCC mockup: componentDidMount failed', e); }
+    }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

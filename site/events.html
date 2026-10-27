@@ -2,7 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SRCC Events</title>
+<title>Events · SRCC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Upcoming shows, studio nights, circles and workshops at SRCC in Columbia, PA, plus an archive of every past show.">
+<meta name="theme-color" content="#10212d">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="apple-touch-icon" href="images/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SRCC: Susquehanna River Creative Conspiracy">
+<meta property="og:title" content="Events · SRCC">
+<meta property="og:description" content="Upcoming shows, studio nights, circles and workshops at SRCC in Columbia, PA, plus an archive of every past show.">
+<meta property="og:url" content="https://jpas116.github.io/SRCC/events.html">
+<meta property="og:image" content="https://jpas116.github.io/SRCC/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -58,7 +72,7 @@ a{color:#ede4d1}a:hover{color:#ffffff}
 <section aria-labelledby="upcoming-title" style="max-width: 1200px; margin: 0 auto; padding: 0 24px 96px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
   <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
     <h2 id="upcoming-title" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4vw, 44px); line-height: 1">Coming up</h2>
-    <p style="margin: 0; display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-size: 13px; color: #a8bccb"><span style="width: 10px; height: 10px; border-radius: 50%; background: #7fcf8a; display: inline-block"></span>Once live, syncs from Zeffy automatically</p>
+    <p style="margin: 0; display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-size: 13px; color: #a8bccb"><span style="width: 10px; height: 10px; border-radius: 50%; background: #7fcf8a; display: inline-block"></span>{{feedNote}}</p>
   </div>
   <div role="group" aria-label="Filter events" style="display: flex; flex-wrap: wrap; gap: 10px">
     <sc-for list="{{filters}}" as="f" hint-placeholder-count="6">
@@ -83,13 +97,16 @@ a{color:#ede4d1}a:hover{color:#ffffff}
           <p style="margin: 0; font-size: 15px; color: #3f4a52">{{ev.when}}</p>
         </div>
         <sc-if value="{{ev.tickets}}" hint-placeholder-val="{{ false }}">
-          <a href="event.html" style="text-decoration: none; background: #142028; color: #dcb355; padding: 14px 22px; border-radius: 999px; font-weight: 700; font-size: 15px">Get tickets · {{ev.price}}</a>
+          <a href="{{ev.href}}" target="_blank" rel="noopener" style="text-decoration: none; background: #142028; color: #dcb355; padding: 14px 22px; border-radius: 999px; font-weight: 700; font-size: 15px">Get tickets · {{ev.price}}</a>
         </sc-if>
         <sc-if value="{{ev.noTickets}}" hint-placeholder-val="{{ true }}">
           <span style="font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 600; padding: 14px 0">{{ev.price}}</span>
         </sc-if>
       </article>
     </sc-for>
+    <sc-if value="{{noUpcoming}}" hint-placeholder-val="{{ false }}">
+      <p style="margin: 0; padding: 24px; border: 2px dashed #2f5d4a; border-radius: 16px; color: #a8bccb; font-size: 16px">Nothing in this category in the next two months. Check back soon, or come to Open Mic any Tuesday.</p>
+    </sc-if>
   </div>
 </section>
 
@@ -100,26 +117,36 @@ a{color:#ede4d1}a:hover{color:#ffffff}
     <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px">
       <div style="display: flex; flex-direction: column; gap: 10px">
         <p style="margin: 0; font-family: 'Nunito', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #2f5d4a">The archive</p>
-        <h2 id="archive-title" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(36px, 5vw, 56px); line-height: 1">100+ nights and counting.</h2>
+        <h2 id="archive-title" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(36px, 5vw, 56px); line-height: 1">{{archiveTotal}} nights and counting.</h2>
       </div>
-      <label style="display: flex; flex-direction: column; gap: 8px; font-weight: 600; font-size: 15px; flex: 0 1 340px">Search past shows<input type="search" placeholder="Band, artist or event" style="font: inherit; font-weight: 400; padding: 13px 16px; border-radius: 999px; border: 2px solid #142028; background: #ffffff; color: #142028"></label>
+      <label style="display: flex; flex-direction: column; gap: 8px; font-weight: 600; font-size: 15px; flex: 0 1 340px">Search past shows<input id="archive-search" type="search" placeholder="Band, artist or event" value="{{query}}" onInput="{{onSearch}}" style="font: inherit; font-weight: 400; padding: 13px 16px; border-radius: 999px; border: 2px solid #142028; background: #ffffff; color: #142028"></label>
     </div>
     <div role="group" aria-label="Year" style="display: flex; flex-wrap: wrap; gap: 10px">
-      <button type="button" aria-pressed="true" style="font: inherit; font-weight: 700; padding: 10px 18px; min-height: 44px; border-radius: 999px; border: 2px solid #142028; background: #142028; color: #ede4d1">2026</button>
-      <button type="button" aria-pressed="false" style="font: inherit; font-weight: 700; padding: 10px 18px; min-height: 44px; border-radius: 999px; border: 2px solid #142028; background: transparent; color: #142028">2025</button>
-      <button type="button" aria-pressed="false" style="font: inherit; font-weight: 700; padding: 10px 18px; min-height: 44px; border-radius: 999px; border: 2px solid #142028; background: transparent; color: #142028">2024</button>
-      <button type="button" aria-pressed="false" style="font: inherit; font-weight: 700; padding: 10px 18px; min-height: 44px; border-radius: 999px; border: 2px solid #142028; background: transparent; color: #142028">2023</button>
+      <sc-for list="{{years}}" as="y" hint-placeholder-count="5">
+        <button type="button" aria-pressed="{{y.on}}" onClick="{{y.pick}}" style="font: inherit; font-weight: 700; padding: 10px 18px; min-height: 44px; border-radius: 999px; border: 2px solid #142028; background: {{y.bg}}; color: {{y.fg}}; cursor: pointer">{{y.label}}</button>
+      </sc-for>
     </div>
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 32px 24px">
       <sc-for list="{{archive}}" as="p" hint-placeholder-count="8">
         <article style="background: #ffffff; padding: 10px 10px 18px; box-shadow: 0 10px 24px rgba(16,33,45,0.14); transform: rotate({{p.tilt}}); display: flex; flex-direction: column; gap: 10px">
-          <img src="{{p.img}}" alt="{{p.title}} flyer" style="display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: top; background: {{p.bg}}">
+          <sc-if value="{{p.hasImg}}" hint-placeholder-val="{{ true }}">
+            <img src="{{p.img}}" alt="{{p.title}} flyer" loading="lazy" style="display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: top; background: {{p.bg}}">
+          </sc-if>
+          <sc-if value="{{p.noImg}}" hint-placeholder-val="{{ false }}">
+            <div style="aspect-ratio: 4 / 5; background: {{p.bg}}; display: flex; flex-direction: column; justify-content: flex-end; padding: 18px; box-sizing: border-box; color: #ede4d1">
+              <span style="font-family: 'Nunito', sans-serif; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.8">{{p.category}}</span>
+              <span style="font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 24px; line-height: 1.1; margin-top: 6px">{{p.title}}</span>
+            </div>
+          </sc-if>
           <h3 style="margin: 0 4px; font-size: 18px; font-weight: 700; line-height: 1.25">{{p.title}}</h3>
           <p style="margin: 0 4px; font-family: 'Nunito', sans-serif; font-size: 12px; color: #3f4a52">{{p.date}}</p>
         </article>
       </sc-for>
     </div>
-    <button type="button" style="align-self: center; font: inherit; font-weight: 700; padding: 14px 26px; border-radius: 999px; border: 2px solid #142028; background: transparent; color: #142028; cursor: pointer">Load more shows</button>
+    <p style="margin: 0; text-align: center; font-family: 'Nunito', sans-serif; font-size: 13px; color: #3f4a52">{{archiveCount}}</p>
+    <sc-if value="{{hasMore}}" hint-placeholder-val="{{ true }}">
+      <button type="button" onClick="{{loadMore}}" style="align-self: center; font: inherit; font-weight: 700; padding: 14px 26px; border-radius: 999px; border: 2px solid #142028; background: transparent; color: #142028; cursor: pointer">Load more shows</button>
+    </sc-if>
   </div>
 </section>
 
@@ -130,11 +157,11 @@ a{color:#ede4d1}a:hover{color:#ffffff}
       <p style="margin: 0; font-size: 17px; line-height: 1.55; color: #d5dde3; max-width: 400px">SRCC is a 501(c)(3) nonprofit. Every gift keeps the doors open, the amps on and the art supplies stocked.</p>
       <a href="https://www.zeffy.com/en-US/donation-form/donate-to-support-srcc" style="align-self: flex-start; text-decoration: none; background: {{accent}}; color: #10212d; padding: 16px 28px; border-radius: 999px; font-weight: 700; font-size: 17px">Donate</a>
     </div>
-    <form aria-label="Newsletter signup" style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 12px; max-width: 460px">
+    <form id="news-form" aria-label="Newsletter signup" onSubmit="{{subscribe}}" style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 12px; max-width: 460px">
       <label for="news-email" style="font-weight: 700; font-size: 18px">Get the monthly lineup in your inbox</label>
       <div style="display: flex; flex-wrap: wrap; gap: 10px">
         <input id="news-email" type="email" placeholder="you@example.com" style="flex: 1 1 200px; font: inherit; padding: 14px 16px; border-radius: 999px; border: 2px solid #2f5d4a; background: #1b3444; color: #ede4d1">
-        <button type="button" style="font: inherit; font-weight: 700; background: #ede4d1; color: #10212d; border: none; padding: 14px 24px; border-radius: 999px; cursor: pointer">Sign up</button>
+        <button type="submit" style="font: inherit; font-weight: 700; background: #ede4d1; color: #10212d; border: none; padding: 14px 24px; border-radius: 999px; cursor: pointer">Sign up</button>
       </div>
     </form>
   </div>
@@ -151,59 +178,78 @@ a{color:#ede4d1}a:hover{color:#ffffff}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#c97b3d","options":["#c97b3d","#dcb355","#6fa88a","#4f8fbf"]},"$preview":{"width":1440,"height":3000}}'>
 class Component extends DCLogic {
+  componentDidMount() {
+    SRCC.loadJSON('data/events.json', (d) => this.setState({ feed: d }));
+    SRCC.loadJSON('data/archive.json', (d) => this.setState({ archiveAll: d }));
+  }
   renderVals() {
     const accent = this.props.accent ?? '#c97b3d';
-    const current = (this.state && this.state.filter) || 'All';
+    const st = this.state || {};
+    const current = st.filter || 'All';
     const tags = {
       'Live music': { tagBg: '#142028', tagFg: '#dcb355' },
+      'Weekly': { tagBg: '#2f5d4a', tagFg: '#ffffff' },
       'Art': { tagBg: '#2f5d4a', tagFg: '#ffffff' },
       'Community': { tagBg: '#6b4a2f', tagFg: '#ffffff' },
       'Wellness': { tagBg: '#3d5a80', tagFg: '#ffffff' },
       'Workshops': { tagBg: '#8a4b1f', tagFg: '#ffffff' }
     };
     const imgFor = {
-      'Creative Circles: Mutual Support Group for Artists': 'images/creative-circles.jpg',
+      'Creative Circles': 'images/creative-circles.jpg',
       'Boundaries Lounge Jams': 'images/ev-lounge-jams.jpg',
-      'Yoga Flow': 'images/ev-yoga.jpg'
+      'Yoga': 'images/ev-yoga.jpg',
+      'Open Mic': 'images/open-mic.jpg',
+      'Open Art': 'images/open-art-studio.jpg'
     };
-    const all = [
-      { mon: 'OCT', day: '24', dow: 'SAT', cat: 'Live music', title: '[Headliner], [Support acts]', when: 'Doors [TIME] · [All ages?]', price: '[PRICE]', tickets: true },
-      { mon: 'OCT', day: '25', dow: 'SUN', cat: 'Community', title: 'Creative Circles: Mutual Support Group for Artists', when: '5:30–6:30pm · Last Sundays', price: 'Free', tickets: false },
-      { mon: 'OCT', day: '31', dow: 'SAT', cat: 'Live music', title: '[Event title]', when: '[TIME]', price: '[PRICE]', tickets: true },
-      { mon: 'NOV', day: '08', dow: 'SUN', cat: 'Live music', title: 'Boundaries Lounge Jams', when: '3–5pm · Second Sundays · Hosted by Tom Hopkins', price: '[PRICE]', tickets: false },
-      { mon: 'NOV', day: '15', dow: 'SUN', cat: 'Wellness', title: 'Yoga Flow', when: '10:30am · Every 3rd Sunday · All levels welcome', price: '$10', tickets: true },
-      { mon: 'NOV', day: '[ ]', dow: '[DAY]', cat: 'Workshops', title: '[Workshop title]', when: '[TIME] · Limited spots', price: '[PRICE]', tickets: true },
-      { mon: 'NOV', day: '[ ]', dow: '[DAY]', cat: 'Art', title: '[Art night / exhibition]', when: '[TIME]', price: '[PRICE]', tickets: false },
-      { mon: 'NOV', day: '29', dow: 'SUN', cat: 'Community', title: 'Creative Circles: Mutual Support Group for Artists', when: '5:30–6:30pm · Last Sundays', price: 'Free', tickets: false }
-    ].map((e) => ({ ...e, ...tags[e.cat], noTickets: !e.tickets, img: imgFor[e.title] || '', hasImg: !!imgFor[e.title] }));
+    const feed = (st.feed && st.feed.events) || [];
+    const all = feed.map((ev) => {
+      const d = SRCC.fmtDate(ev.start);
+      const key = Object.keys(imgFor).find((k) => ev.title.toLowerCase().includes(k.toLowerCase()));
+      const tickets = !!ev.ticketUrl;
+      return {
+        mon: d.mon, day: d.day, dow: d.dow, cat: ev.category, title: ev.title,
+        when: SRCC.when(ev) + (ev.location && !/srcc|lancaster ave/i.test(ev.location) ? ' · ' + ev.location : ''),
+        price: ev.price || (tickets ? '' : ''), tickets, noTickets: !tickets, href: ev.ticketUrl || '#',
+        ...(tags[ev.category] || tags['Live music']), img: key ? imgFor[key] : '', hasImg: !!key
+      };
+    });
     const filters = ['All', 'Live music', 'Art', 'Community', 'Wellness', 'Workshops'].map((label) => {
       const on = label === current;
       return { label, on, bg: on ? accent : 'transparent', fg: on ? '#10212d' : '#ede4d1', border: on ? accent : '#ede4d1', pick: () => this.setState({ filter: label }) };
     });
-    const shown = current === 'All' ? all : all.filter((e) => e.cat === current);
+    const matchCat = (c) => current === 'All' || c === current || (current === 'Community' && c === 'Weekly');
+    const shown = all.filter((e) => matchCat(e.cat));
+    const source = st.feed ? st.feed.source : '';
+    const feedNote = source === 'google-calendar' ? 'Live from SRCC’s Google Calendar · refreshes every few hours' : 'Once live, syncs from Zeffy automatically';
+
+    // Archive
     const bgs = ['#24473a', '#2f5d4a', '#1b3444', '#6b4a2f'];
     const tilts = ['-1.2deg', '0.8deg', '-0.4deg', '1.3deg'];
-    const flyers = [
-      'images/ev-public-disco-porch.jpg',
-      'images/ev-hdmr-catamount.jpg',
-      'images/ev-future-casualties.jpg',
-      'images/ev-big-blitz.jpg',
-      'images/ev-rascal-revival.jpg',
-      'images/ev-nate-romano-release.jpg',
-      'images/ev-polyrhythmics.jpg',
-      'images/ev-solstice-circus.jpg'
-    ];
-    const archive = [
-      ['Public Disco Porch, Nate Romano', 'Oct 17, 2026'],
-      ['HDMR, Catamount', 'Oct 10, 2026'],
-      ['Future Casualties, Proper Spirit, Sharp Darts', 'Sep 19, 2026'],
-      ['Big Blitz', 'Sep 18, 2026'],
-      ['Rascal Revival', 'Aug 28, 2026'],
-      ['Nate Romano Album Release Party', 'Aug 16, 2026'],
-      ['Polyrhythmics featuring Adryon de León', 'Jul 19, 2026'],
-      ['Solstice Circus (SRCC Studio Fundraiser)', 'Jun 28, 2026']
-    ].map(([title, date], i) => ({ title, date, bg: bgs[i % 4], tilt: tilts[i % 4], img: flyers[i] }));
-    return { accent, filters, shown, archive };
+    const archiveAll = st.archiveAll || [];
+    const year = st.year || 'All';
+    const query = st.query || '';
+    const q = query.trim().toLowerCase();
+    const yearList = Array.from(new Set(archiveAll.map((e) => e.year))).sort((a, b) => b - a);
+    const years = ['All'].concat(yearList).map((y) => {
+      const on = String(y) === String(year);
+      return { label: String(y), on, bg: on ? '#142028' : 'transparent', fg: on ? '#ede4d1' : '#142028', pick: () => this.setState({ year: y, page: 1 }) };
+    });
+    const filtered = archiveAll.filter((e) => (year === 'All' || e.year === year) && (!q || e.title.toLowerCase().includes(q)));
+    const page = st.page || 1;
+    const pageSize = 12;
+    const archive = filtered.slice(0, page * pageSize).map((e, i) => {
+      const d = new Date(e.date + 'T12:00:00');
+      return { ...e, hasImg: !!e.img, noImg: !e.img, bg: bgs[i % 4], tilt: tilts[i % 4], date: d.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) };
+    });
+    const subscribe = (ev) => { ev.preventDefault(); const e = document.getElementById('news-email').value.trim(); SRCC.mailto('contact@srccpaart.org', 'Add me to the SRCC newsletter', ['Please add ' + (e || 'me') + ' to the monthly lineup email.']); };
+    return {
+      subscribe, accent, filters, shown, noUpcoming: !!st.feed && shown.length === 0, feedNote,
+      years, query, archive, hasMore: archive.length < filtered.length,
+      archiveCount: filtered.length ? 'Showing ' + archive.length + ' of ' + filtered.length : (archiveAll.length ? 'No shows match that search.' : ''),
+      archiveTotal: archiveAll.length ? archiveAll.length + '+' : '100+',
+      loadMore: () => this.setState({ page: page + 1 }),
+      onSearch: (ev) => this.setState({ query: ev.target.value, page: 1 })
+    };
   }
 }
 </script>

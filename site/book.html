@@ -2,7 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Book SRCC</title>
+<title>Book the Space · SRCC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Bring your show, private event, studio session or workshop to SRCC in Columbia, PA.">
+<meta name="theme-color" content="#10212d">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="apple-touch-icon" href="images/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SRCC: Susquehanna River Creative Conspiracy">
+<meta property="og:title" content="Book the Space · SRCC">
+<meta property="og:description" content="Bring your show, private event, studio session or workshop to SRCC in Columbia, PA.">
+<meta property="og:url" content="https://jpas116.github.io/SRCC/book.html">
+<meta property="og:image" content="https://jpas116.github.io/SRCC/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -55,7 +69,7 @@ a{color:#ede4d1}a:hover{color:#ffffff}
 
 <section aria-labelledby="form-title" style="background: #ede4d1; color: #142028">
   <div style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 104px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 56px">
-    <form aria-labelledby="form-title" style="flex: 2 1 520px; min-width: 0; background: #10212d; color: #ede4d1; padding: 36px 32px; border-radius: 18px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; transform: rotate(0.4deg); box-shadow: 0 18px 40px rgba(16,33,45,0.25)">
+    <form id="book-form" aria-labelledby="form-title" onSubmit="{{send}}" style="flex: 2 1 520px; min-width: 0; background: #10212d; color: #ede4d1; padding: 36px 32px; border-radius: 18px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; transform: rotate(0.4deg); box-shadow: 0 18px 40px rgba(16,33,45,0.25)">
       <h2 id="form-title" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 32px">Inquiry: <span style="color: {{accent}}">{{chosen}}</span></h2>
       <div style="display: flex; flex-wrap: wrap; gap: 18px">
         <label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px; font-weight: 600; font-size: 15px">Name<input type="text" name="name" style="font: inherit; font-weight: 400; padding: 13px 14px; border-radius: 10px; border: 2px solid #2f5d4a; background: #1b3444; color: #ede4d1"></label>
@@ -67,8 +81,8 @@ a{color:#ede4d1}a:hover{color:#ffffff}
       </div>
       <label style="display: flex; flex-direction: column; gap: 8px; font-weight: 600; font-size: 15px">Links to your music or project (optional)<input type="url" name="links" placeholder="Bandcamp, Spotify, Instagram…" style="font: inherit; font-weight: 400; padding: 13px 14px; border-radius: 10px; border: 2px solid #2f5d4a; background: #1b3444; color: #ede4d1"></label>
       <label style="display: flex; flex-direction: column; gap: 8px; font-weight: 600; font-size: 15px">Tell us more<textarea name="message" rows="5" style="font: inherit; font-weight: 400; padding: 13px 14px; border-radius: 10px; border: 2px solid #2f5d4a; background: #1b3444; color: #ede4d1; resize: vertical"></textarea></label>
-      <button type="button" style="align-self: flex-start; font: inherit; font-weight: 700; font-size: 17px; background: {{accent}}; color: #10212d; border: none; padding: 16px 28px; border-radius: 999px; cursor: pointer">Send inquiry</button>
-      <p style="margin: 0; font-size: 14px; color: #a8bccb">Goes straight to the booking team at booking@srccpaart.org.</p>
+      <button type="submit" style="align-self: flex-start; font: inherit; font-weight: 700; font-size: 17px; background: {{accent}}; color: #10212d; border: none; padding: 16px 28px; border-radius: 999px; cursor: pointer">Send inquiry</button>
+      <p style="margin: 0; font-size: 14px; color: #a8bccb">Opens an email to booking@srccpaart.org with your details filled in.</p>
     </form>
 
     <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
@@ -124,7 +138,17 @@ class Component extends DCLogic {
       return { ...k, on, bg: on ? accent : 'transparent', fg: on ? '#10212d' : '#ede4d1', border: on ? accent : '#2f5d4a', pick: () => this.setState({ kind: k.id }) };
     });
     const chosen = base.find((k) => k.id === sel).name.toLowerCase();
-    return { accent, kinds, chosen };
+    const send = (ev) => {
+      ev.preventDefault();
+      const f = document.getElementById('book-form');
+      const v = (n) => (f.elements[n] && f.elements[n].value || '').trim();
+      SRCC.mailto('booking@srccpaart.org', 'Booking inquiry: ' + chosen + (v('name') ? ' from ' + v('name') : ''), [
+        'What: ' + chosen, 'Name: ' + v('name'), 'Email: ' + v('email'),
+        v('date') && 'Preferred date: ' + v('date'), v('size') && 'Headcount: ' + v('size'),
+        v('links') && 'Links: ' + v('links'), '', v('message')
+      ]);
+    };
+    return { accent, kinds, chosen, send };
   }
 }
 </script>

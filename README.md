@@ -14,11 +14,12 @@ Browser-viewable mockup: https://jpas116.github.io/SRCC/ (GitHub Pages)
 | `assets/images/original/` | SRCC's existing logo, flyers and photos, pulled from the current site at full size. |
 | `assets/images/web/` | The same images, compressed for the web. |
 | `site/` | A standalone, browser-viewable copy of the mockup, published automatically to GitHub Pages. |
-| `docs/` | The site review, the proposed site map, and integration notes for Zeffy and social feeds. |
+| `docs/` | The site review, the proposed site map, integration notes, and the list of what SRCC needs to provide. |
+| `scripts/` | `fetch_calendar.py` reads SRCC's public Google Calendar into `site/data/events.json` during each deploy. |
 
 ## Plan
 
-1. **Design** — mockup built, awaiting feedback from SRCC. *(done, in review)*
+1. **Design** — mockup built, awaiting feedback from SRCC. Upcoming events already sync from SRCC's Google Calendar. *(done, in review)*
 2. **Content** — SRCC fills the gaps: membership prices and tiers, founders' story, team names and photos, venue specs, photos of the space.
 3. **Build** — turn the approved design into a real site with a no-code admin page so SRCC staff can update events, programs and photos without touching code.
 4. **Integrate** — pull events from Zeffy automatically, embed Zeffy checkout, add the Instagram feed.

@@ -3,7 +3,9 @@ name: Publish mockup to GitHub Pages
 on:
   push:
     branches: [main]
-    paths: ['site/**', '.github/workflows/pages.yml']
+    paths: ['site/**', 'scripts/**', '.github/workflows/pages.yml']
+  schedule:
+    - cron: '17 */6 * * *'   # every 6 hours: refresh events from Google Calendar
   workflow_dispatch:
 
 permissions:
@@ -23,6 +25,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Refresh events from SRCC's public Google Calendar
+        run: |
+          pip install --quiet icalendar recurring_ical_events
+          python scripts/fetch_calendar.py
+          echo "--- events.json ---"
+          head -c 1500 site/data/events.json || true
       - uses: actions/configure-pages@v5
         with:
           enablement: true

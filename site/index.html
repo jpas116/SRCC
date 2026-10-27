@@ -2,7 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SRCC Home</title>
+<title>SRCC · Susquehanna River Creative Conspiracy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Nonprofit studio and venue in Columbia, PA. Music, art, photography, podcasting and more. Open Mic and Open Art Studio every Tuesday.">
+<meta name="theme-color" content="#10212d">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="apple-touch-icon" href="images/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SRCC: Susquehanna River Creative Conspiracy">
+<meta property="og:title" content="SRCC · Susquehanna River Creative Conspiracy">
+<meta property="og:description" content="Nonprofit studio and venue in Columbia, PA. Music, art, photography, podcasting and more. Open Mic and Open Art Studio every Tuesday.">
+<meta property="og:url" content="https://jpas116.github.io/SRCC/">
+<meta property="og:image" content="https://jpas116.github.io/SRCC/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -80,7 +94,7 @@ a{color:#ede4d1}a:hover{color:#ffffff}
       <p style="margin: 0; font-family: 'Nunito', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #a8bccb">Coming up</p>
       <h2 id="events-title" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: clamp(36px, 5vw, 60px); line-height: 1">This week at SRCC</h2>
     </div>
-    <p style="margin: 0; display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-size: 13px; color: #a8bccb"><span style="width: 10px; height: 10px; border-radius: 50%; background: #7fcf8a; display: inline-block"></span>Once live, syncs from Zeffy automatically</p>
+    <p style="margin: 0; display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-size: 13px; color: #a8bccb"><span style="width: 10px; height: 10px; border-radius: 50%; background: #7fcf8a; display: inline-block"></span>{{feedNote}}</p>
   </div>
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 24px">
     <sc-for list="{{events}}" as="ev" hint-placeholder-count="4">
@@ -97,7 +111,7 @@ a{color:#ede4d1}a:hover{color:#ffffff}
           <h3 style="margin: 0; font-size: 24px; font-weight: 700">{{ev.title}}</h3>
           <p style="margin: 0; font-size: 15px; color: #3f4a52">{{ev.when}}</p>
           <sc-if value="{{ev.tickets}}" hint-placeholder-val="{{ false }}">
-            <a href="event.html" style="margin-top: auto; align-self: flex-start; text-decoration: none; background: #142028; color: #dcb355; padding: 12px 18px; border-radius: 999px; font-weight: 700; font-size: 15px">Get tickets · {{ev.price}}</a>
+            <a href="{{ev.href}}" target="_blank" rel="noopener" style="margin-top: auto; align-self: flex-start; text-decoration: none; background: #142028; color: #dcb355; padding: 12px 18px; border-radius: 999px; font-weight: 700; font-size: 15px">Get tickets · {{ev.price}}</a>
           </sc-if>
           <sc-if value="{{ev.noTickets}}" hint-placeholder-val="{{ true }}">
             <p style="margin: auto 0 0; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 600">{{ev.price}}</p>
@@ -205,11 +219,11 @@ a{color:#ede4d1}a:hover{color:#ffffff}
       <p style="margin: 0; font-size: 17px; line-height: 1.55; color: #d5dde3; max-width: 400px">SRCC is a 501(c)(3) nonprofit. Every gift keeps the doors open, the amps on and the art supplies stocked.</p>
       <a href="https://www.zeffy.com/en-US/donation-form/donate-to-support-srcc" style="align-self: flex-start; text-decoration: none; background: {{accent}}; color: #10212d; padding: 16px 28px; border-radius: 999px; font-weight: 700; font-size: 17px">Donate</a>
     </div>
-    <form aria-label="Newsletter signup" style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 12px; max-width: 460px">
+    <form id="news-form" aria-label="Newsletter signup" onSubmit="{{subscribe}}" style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 12px; max-width: 460px">
       <label for="news-email" style="font-weight: 700; font-size: 18px">Get the monthly lineup in your inbox</label>
       <div style="display: flex; flex-wrap: wrap; gap: 10px">
         <input id="news-email" type="email" placeholder="you@example.com" style="flex: 1 1 200px; font: inherit; padding: 14px 16px; border-radius: 999px; border: 2px solid #2f5d4a; background: #1b3444; color: #ede4d1">
-        <button type="button" style="font: inherit; font-weight: 700; background: #ede4d1; color: #10212d; border: none; padding: 14px 24px; border-radius: 999px; cursor: pointer">Sign up</button>
+        <button type="submit" style="font: inherit; font-weight: 700; background: #ede4d1; color: #10212d; border: none; padding: 14px 24px; border-radius: 999px; cursor: pointer">Sign up</button>
       </div>
     </form>
   </div>
@@ -226,16 +240,29 @@ a{color:#ede4d1}a:hover{color:#ffffff}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#c97b3d","options":["#c97b3d","#dcb355","#6fa88a","#4f8fbf"]},"$preview":{"width":1440,"height":4700}}'>
 class Component extends DCLogic {
+  componentDidMount() {
+    SRCC.loadJSON('data/events.json', (d) => this.setState({ feed: d }));
+  }
   renderVals() {
     const cream = { bg: '#ede4d1', perf: '#b8b0a0', tagBg: '#2f5d4a', tagFg: '#ffffff' };
     const hot = { bg: '#dcb355', perf: '#8a6d25', tagBg: '#142028', tagFg: '#dcb355' };
-    const events = [
-      { ...cream, mon: 'OCT', day: '20', dow: 'TUE', tag: 'Weekly', title: 'Open Mic', when: '7–11pm · Full stage & backline', price: '$5 donation at the door', tickets: false },
-      { ...cream, mon: 'OCT', day: '20', dow: 'TUE', tag: 'Weekly', title: 'Open Art Studio', when: '7–11pm · Supplies included', price: '$5 donation at the door', tickets: false },
-      { ...hot, mon: 'OCT', day: '24', dow: 'SAT', tag: 'Live music', title: '[Headliner], [Support acts]', when: 'Doors [TIME] · [All ages?]', price: '[PRICE]', tickets: true },
-      { ...cream, mon: 'OCT', day: '25', dow: 'SUN', tag: 'Last Sundays', title: 'Creative Circles', when: '5:30–6:30pm · Artist support group', price: 'Free · just show up', tickets: false }
-    ].map((e) => ({ ...e, noTickets: !e.tickets }));
-    return { accent: this.props.accent ?? '#c97b3d', events };
+    const feed = (this.state && this.state.feed && this.state.feed.events) || [];
+    const events = feed.slice(0, 4).map((ev) => {
+      const d = SRCC.fmtDate(ev.start);
+      const live = ev.category === 'Live music';
+      const tickets = !!ev.ticketUrl;
+      return {
+        ...(live ? hot : cream), mon: d.mon, day: d.day, dow: d.dow, tag: ev.category, title: ev.title,
+        when: SRCC.when(ev), price: ev.price ? (tickets ? ev.price : ev.price + (ev.category === 'Weekly' ? ' donation at the door' : '')) : (tickets ? '' : 'See details'),
+        tickets, noTickets: !tickets, href: ev.ticketUrl || 'events.html'
+      };
+    });
+    const source = this.state && this.state.feed ? this.state.feed.source : '';
+    const subscribe = (ev) => { ev.preventDefault(); const e = document.getElementById('news-email').value.trim(); SRCC.mailto('contact@srccpaart.org', 'Add me to the SRCC newsletter', ['Please add ' + (e || 'me') + ' to the monthly lineup email.']); };
+    return {
+      subscribe, accent: this.props.accent ?? '#c97b3d', events, hasEvents: events.length > 0, loading: !(this.state && this.state.feed),
+      feedNote: source === 'google-calendar' ? 'Live from SRCC\u2019s Google Calendar \u00b7 refreshes every few hours' : 'Once live, syncs from Zeffy automatically'
+    };
   }
 }
 </script>

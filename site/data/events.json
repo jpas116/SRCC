@@ -1,0 +1,11 @@
+{
+  "source": "fallback",
+  "generatedAt": "2026-10-27T16:00:00-04:00",
+  "events": [
+    {"title": "Open Mic", "start": "2026-10-27T19:00:00-04:00", "end": "2026-10-27T23:00:00-04:00", "allDay": false, "category": "Weekly", "price": "$5", "ticketUrl": "", "location": "SRCC, 156B Lancaster Ave, Columbia, PA", "description": "Full stage, full backline, bands welcome. $5 donation at the door."},
+    {"title": "Open Art Studio", "start": "2026-10-27T19:00:00-04:00", "end": "2026-10-27T23:00:00-04:00", "allDay": false, "category": "Weekly", "price": "$5", "ticketUrl": "", "location": "SRCC, 156B Lancaster Ave, Columbia, PA", "description": "Supplies included, all ages. $5 donation."},
+    {"title": "Yoga Flow", "start": "2026-11-15T10:30:00-05:00", "end": "2026-11-15T12:00:00-05:00", "allDay": false, "category": "Wellness", "price": "$10", "ticketUrl": "", "location": "SRCC, 156B Lancaster Ave, Columbia, PA", "description": "Live meditative music. Beginners and all levels welcome."},
+    {"title": "Boundaries Lounge Jams", "start": "2026-11-08T15:00:00-05:00", "end": "2026-11-08T17:00:00-05:00", "allDay": false, "category": "Community", "price": "", "ticketUrl": "", "location": "SRCC, 156B Lancaster Ave, Columbia, PA", "description": "Collaborative jamming, jazz and musical experiments. Hosted by Tom Hopkins."},
+    {"title": "Creative Circles: Mutual Support Group for Artists", "start": "2026-11-29T17:30:00-05:00", "end": "2026-11-29T18:30:00-05:00", "allDay": false, "category": "Community", "price": "Free", "ticketUrl": "", "location": "SRCC, 156B Lancaster Ave, Columbia, PA", "description": "Last Sunday of the month."}
+  ]
+}
