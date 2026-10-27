@@ -4,6 +4,7 @@ A new website for the **Susquehanna River Creative Conspiracy** (SRCC), a 501(c)
 
 Current site: [srccpaart.org](https://www.srccpaart.org)
 Live design mockup: https://claude.ai/artifact/Q4k5GHS2Ug6rYHJFdxJDx7 (shared on request)
+Browser-viewable mockup: https://jpas116.github.io/SRCC/ (GitHub Pages)
 
 ## What's in this repo
 
@@ -12,6 +13,7 @@ Live design mockup: https://claude.ai/artifact/Q4k5GHS2Ug6rYHJFdxJDx7 (shared on
 | `design/` | Source files for the seven-page design mockup (Home, Events, Single Event, Programs, About, Membership, Book the Space). These are design-canvas files, not a runnable website yet. |
 | `assets/images/original/` | SRCC's existing logo, flyers and photos, pulled from the current site at full size. |
 | `assets/images/web/` | The same images, compressed for the web. |
+| `site/` | A standalone, browser-viewable copy of the mockup, published automatically to GitHub Pages. |
 | `docs/` | The site review, the proposed site map, and integration notes for Zeffy and social feeds. |
 
 ## Plan

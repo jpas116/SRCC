@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Book SRCC</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Instrument+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0e2421;font-family:'Instrument Sans',system-ui,sans-serif;color:#efe9da}
+a{color:#efe9da}a:hover{color:#ffffff}
+</style>
+</helmet>
+
+<div style="width: 100%; background: #0e2421; color: #efe9da; font-family: 'Instrument Sans', system-ui, sans-serif; overflow: hidden">
+
+<header style="max-width: 1200px; margin: 0 auto; padding: 20px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px">
+  <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #efe9da">
+    <img src="images/srcc-logo.png" alt="SRCC: Susquehanna River Creative Conspiracy" style="display: block; height: 64px; width: auto">
+    
+  </a>
+  <nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-weight: 600; font-size: 16px">
+    <a href="events.html" style="text-decoration: none; padding: 10px 0">Events</a>
+    <a href="programs.html" style="text-decoration: none; padding: 10px 0">Programs</a>
+    <a href="membership.html" style="text-decoration: none; padding: 10px 0">Membership</a>
+    <a href="about.html" style="text-decoration: none; padding: 10px 0">About</a>
+    <a href="book.html" aria-current="page" style="text-decoration: none; padding: 10px 0 7px; border-bottom: 3px solid {{accent}}">Book the Space</a>
+    <a href="#donate" style="text-decoration: none; background: {{accent}}; color: #0e2421; padding: 12px 22px; border-radius: 999px; font-weight: 700">Donate</a>
+  </nav>
+</header>
+
+<section aria-labelledby="page-title" style="position: relative; max-width: 1200px; margin: 0 auto; padding: 64px 24px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+  <svg viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; left: -80px; top: 0; width: 130%; height: 100%; opacity: 0.35; pointer-events: none"><path d="M0 80 C200 30 340 150 540 90 S880 30 1200 110" fill="none" stroke="#2d6f65" stroke-width="2"></path><path d="M0 130 C220 80 350 200 560 140 S900 80 1200 160" fill="none" stroke="#2d6f65" stroke-width="2"></path><path d="M0 180 C240 130 360 250 580 190 S920 130 1200 210" fill="none" stroke="#2d6f65" stroke-width="2"></path></svg>
+  <p style="position: relative; margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #a9c2bc">Bands · private events · studio time</p>
+  <h1 id="page-title" style="position: relative; margin: 0; font-family: 'Dela Gothic One', sans-serif; font-weight: 400; font-size: clamp(56px, 8vw, 112px); line-height: 0.95">Book <span style="color: {{accent}}">the space.</span></h1>
+  <p style="position: relative; margin: 0; font-size: 20px; line-height: 1.55; color: #d3dcd8; max-width: 620px">Touring act looking for a Columbia stop? Planning a release party, workshop or private night? Pick what you're planning and tell us about it.</p>
+</section>
+
+<section aria-label="What are you planning?" style="max-width: 1200px; margin: 0 auto; padding: 0 24px 72px; box-sizing: border-box">
+  <div role="radiogroup" aria-label="What are you planning?" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px">
+    <sc-for list="{{kinds}}" as="k" hint-placeholder-count="4">
+      <button type="button" role="radio" aria-checked="{{k.on}}" onClick="{{k.pick}}" style="font: inherit; text-align: left; cursor: pointer; background: {{k.bg}}; color: {{k.fg}}; border: 2px solid {{k.border}}; border-radius: 8px; padding: 26px; display: flex; flex-direction: column; gap: 10px; min-height: 170px">
+        <span style="font-family: 'Dela Gothic One', sans-serif; font-size: 26px; line-height: 1.05">{{k.name}}</span>
+        <span style="font-size: 16px; line-height: 1.5">{{k.desc}}</span>
+      </button>
+    </sc-for>
+  </div>
+</section>
+
+<svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true" style="display: block; width: 100%; height: 80px"><path d="M0 40 C180 0 360 80 540 40 S900 0 1080 40 S1320 80 1440 40 L1440 80 L0 80 Z" fill="#efe9da"></path></svg>
+
+<section aria-labelledby="form-title" style="background: #efe9da; color: #15201e">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 104px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 56px">
+    <form aria-labelledby="form-title" style="flex: 2 1 520px; min-width: 0; background: #0e2421; color: #efe9da; padding: 36px 32px; border-radius: 8px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; transform: rotate(0.4deg); box-shadow: 0 18px 40px rgba(14,36,33,0.25)">
+      <h2 id="form-title" style="margin: 0; font-family: 'Dela Gothic One', sans-serif; font-weight: 400; font-size: 32px">Inquiry: <span style="color: {{accent}}">{{chosen}}</span></h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 18px">
+        <label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px; font-weight: 600; font-size: 15px">Name<input type="text" name="name" style="font: inherit; font-weight: 400; padding: 13px 14px; border-radius: 4px; border: 2px solid #2d6f65; background: #163b36; color: #efe9da"></label>
+        <label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px; font-weight: 600; font-size: 15px">Email<input type="email" name="email" style="font: inherit; font-weight: 400; padding: 13px 14px; border-radius: 4px; border: 2px solid #2d6f65; background: #163b36; color: #efe9da"></label>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 18px">
+        <label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px; font-weight: 600; font-size: 15px">Preferred date<input type="date" name="date" style="font: inherit; font-weight: 400; padding: 12px 14px; border-radius: 4px; border: 2px solid #2d6f65; background: #163b36; color: #efe9da"></label>
+        <label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px; font-weight: 600; font-size: 15px">Expected headcount<input type="number" name="size" min="1" style="font: inherit; font-weight: 400; padding: 13px 14px; border-radius: 4px; border: 2px solid #2d6f65; background: #163b36; color: #efe9da"></label>
+      </div>
+      <label style="display: flex; flex-direction: column; gap: 8px; font-weight: 600; font-size: 15px">Links to your music or project (optional)<input type="url" name="links" placeholder="Bandcamp, Spotify, Instagram…" style="font: inherit; font-weight: 400; padding: 13px 14px; border-radius: 4px; border: 2px solid #2d6f65; background: #163b36; color: #efe9da"></label>
+      <label style="display: flex; flex-direction: column; gap: 8px; font-weight: 600; font-size: 15px">Tell us more<textarea name="message" rows="5" style="font: inherit; font-weight: 400; padding: 13px 14px; border-radius: 4px; border: 2px solid #2d6f65; background: #163b36; color: #efe9da; resize: vertical"></textarea></label>
+      <button type="button" style="align-self: flex-start; font: inherit; font-weight: 700; font-size: 17px; background: {{accent}}; color: #0e2421; border: none; padding: 16px 28px; border-radius: 999px; cursor: pointer">Send inquiry</button>
+      <p style="margin: 0; font-size: 14px; color: #a9c2bc">Goes straight to the booking team at booking@srccpaart.org.</p>
+    </form>
+
+    <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+      <div style="background: #ffffff; border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+        <h2 style="margin: 0; font-family: 'Dela Gothic One', sans-serif; font-weight: 400; font-size: 24px">The room</h2>
+        <dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 18px; font-size: 16px">
+          <dt style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #2d6f65; padding-top: 3px">CAPACITY</dt><dd style="margin: 0; font-weight: 600">[#] standing / [#] seated</dd>
+          <dt style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #2d6f65; padding-top: 3px">STAGE</dt><dd style="margin: 0; font-weight: 600">Full stage · [size]</dd>
+          <dt style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #2d6f65; padding-top: 3px">SOUND</dt><dd style="margin: 0; font-weight: 600">Full backline · [PA details]</dd>
+          <dt style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #2d6f65; padding-top: 3px">LOAD-IN</dt><dd style="margin: 0; font-weight: 600">[Details]</dd>
+        </dl>
+        <img src="images/open-mic.jpg" alt="A performer on the SRCC stage" style="display: block; width: 100%; height: 220px; object-fit: cover; object-position: 50% 50%; border-radius: 4px">
+      </div>
+      <div style="background: #ffffff; border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #2d6f65">Find us</span>
+        <a href="https://maps.app.goo.gl/WMb3ZFDi5LZJLCVc8" style="color: #15201e; font-weight: 700; font-size: 18px; text-decoration: none">156B Lancaster Ave, Columbia, PA 17512</a>
+        <span style="font-size: 15px; color: #3b4a47">Lancaster County, right by York County</span>
+        <a href="mailto:booking@srccpaart.org" style="color: #15201e; font-weight: 700; padding: 8px 0">booking@srccpaart.org</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="donate" style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 40px; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+  <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between">
+    <span style="font-family: 'Dela Gothic One', sans-serif; font-size: clamp(28px, 3.5vw, 40px); line-height: 1.05">Keep the river making noise.</span>
+    <a href="https://www.zeffy.com/en-US/donation-form/donate-to-support-srcc" style="text-decoration: none; background: {{accent}}; color: #0e2421; padding: 16px 28px; border-radius: 999px; font-weight: 700; font-size: 17px">Donate</a>
+  </div>
+  <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 12px 28px; font-weight: 600">
+    <a href="index.html" style="text-decoration: none">Home</a><a href="events.html" style="text-decoration: none">Events</a><a href="programs.html" style="text-decoration: none">Programs</a><a href="membership.html" style="text-decoration: none">Membership</a><a href="about.html" style="text-decoration: none">About</a><a href="book.html" style="text-decoration: none">Book the Space</a>
+  </nav>
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 2px solid #1f4540; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9c2bc">
+    <span>© SRCC 2023–2026 · 156B Lancaster Ave, Columbia, PA 17512</span>
+    <a href="mailto:contact@srccpaart.org" style="color: #a9c2bc">contact@srccpaart.org</a>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#ff5a7e","options":["#ff5a7e","#f2d43a","#5fd3c0","#ff7a3d"]},"$preview":{"width":1440,"height":2600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#ff5a7e';
+    const sel = (this.state && this.state.kind) || 'show';
+    const base = [
+      { id: 'show', name: 'A show', desc: 'Bands, touring acts, songwriter rounds, DJ nights.' },
+      { id: 'private', name: 'A private event', desc: 'Birthdays, release parties, fundraisers, meetups.' },
+      { id: 'studio', name: 'Studio time', desc: 'Rehearsal, recording, podcasting or a photo shoot.' },
+      { id: 'workshop', name: 'A workshop or program', desc: 'Teach a class, start a circle, pitch a series.' }
+    ];
+    const kinds = base.map((k) => {
+      const on = k.id === sel;
+      return { ...k, on, bg: on ? accent : 'transparent', fg: on ? '#0e2421' : '#efe9da', border: on ? accent : '#2d6f65', pick: () => this.setState({ kind: k.id }) };
+    });
+    const chosen = base.find((k) => k.id === sel).name.toLowerCase();
+    return { accent, kinds, chosen };
+  }
+}
+</script>
+</body>
+</html>
