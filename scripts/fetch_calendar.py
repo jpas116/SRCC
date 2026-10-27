@@ -86,6 +86,22 @@ def build(raw: bytes) -> int:
     start = now - dt.timedelta(hours=6)
     end = now + dt.timedelta(days=DAYS_AHEAD)
 
+    # Diagnostics so the Actions log shows what the feed actually contains.
+    vevents = [c for c in cal.walk("VEVENT")]
+    print(f"feed has {len(vevents)} VEVENT entries ({len(raw)} bytes)")
+    starts = []
+    for c in vevents:
+        try:
+            d = c.get("DTSTART").dt
+            starts.append(d if isinstance(d, dt.datetime) else dt.datetime.combine(d, dt.time(0, 0)))
+        except Exception:  # noqa: BLE001
+            pass
+    if starts:
+        naive = [x.replace(tzinfo=None) for x in starts]
+        print(f"earliest DTSTART {min(naive)}  latest DTSTART {max(naive)}")
+        recurring = sum(1 for c in vevents if c.get("RRULE"))
+        print(f"{recurring} recurring entries; sample titles: " + "; ".join(str(c.get("SUMMARY", ""))[:40] for c in vevents[:6]))
+
     events = []
     for ev in recurring_ical_events.of(cal).between(start, end):
         dtstart = ev.get("DTSTART").dt
@@ -115,6 +131,9 @@ def build(raw: bytes) -> int:
 
     events.sort(key=lambda x: x["start"])
     events = events[:MAX_EVENTS]
+    if not events:
+        print(f"no events in the next {DAYS_AHEAD} days; keeping existing events.json (fallback)")
+        return 0
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps({
         "source": "google-calendar",
